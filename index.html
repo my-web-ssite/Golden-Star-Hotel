@@ -20,31 +20,31 @@
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, sans-serif; }
         body { background: var(--black); color: var(--white); line-height: 1.6; overflow-x: hidden; }
 
-        /* Header */
+        /* الهيدر (رأس الصفحة) */
         header { 
             background: linear-gradient(to bottom, #1a1a1a, var(--black)); 
-            padding: 50px 20px; 
+            padding: 60px 20px; 
             text-align: center; 
             border-bottom: 2px solid var(--gold); 
         }
-        header h1 { color: var(--gold); font-size: 2.8rem; letter-spacing: 2px; margin-bottom: 10px; text-shadow: 0 4px 15px rgba(212,175,55,0.3); }
+        header h1 { color: var(--gold); font-size: 2.8rem; letter-spacing: 2px; margin-bottom: 10px; text-shadow: 0 4px 15px rgba(212,175,55,0.4); }
         header p { color: #aaa; font-size: 1.2rem; max-width: 600px; margin: 0 auto; }
 
-        /* Gallery Section */
+        /* قسم المعرض (الصور) */
         .gallery-section { padding: 40px 0; }
         .swiper { width: 100%; max-width: 1100px; height: 650px; margin: 0 auto; border-radius: 25px; border: 2px solid rgba(212, 175, 55, 0.3); box-shadow: 0 20px 50px rgba(0,0,0,0.9); }
         .swiper-slide { position: relative; background: #000; overflow: hidden; }
-        .swiper-slide img { width: 100%; height: 100%; object-fit: cover; transition: transform 10s linear; filter: brightness(1.1); }
-        .swiper-slide-active img { transform: scale(1.25); }
+        .swiper-slide img { width: 100%; height: 100%; object-fit: cover; transition: transform 8s linear; filter: brightness(1.1) contrast(1.05); }
+        .swiper-slide-active img { transform: scale(1.2); }
         
-        /* Badges */
+        /* شارات الأقسام */
         .badge { position: absolute; top: 25px; right: 25px; background: var(--gold); color: black; padding: 10px 22px; border-radius: 8px; font-weight: bold; z-index: 10; box-shadow: 0 5px 20px rgba(0,0,0,0.6); font-size: 0.9rem; }
         .badge.visitor { background: #fff; color: #333; }
 
         .img-info { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent, rgba(0,0,0,0.95)); padding: 60px 30px 30px; text-align: right; z-index: 5; }
         .img-info h3 { color: var(--gold); font-size: 1.8rem; margin: 0; }
 
-        /* Services Section */
+        /* قسم الخدمات */
         .services { padding: 80px 20px; background: var(--surface); }
         .section-title { text-align: center; color: var(--gold); font-size: 2.2rem; margin-bottom: 50px; position: relative; }
         .section-title::after { content: ''; width: 60px; height: 3px; background: var(--gold); position: absolute; bottom: -10px; right: 50%; transform: translateX(50%); }
@@ -56,11 +56,11 @@
         .service-card h3 { font-size: 1.5rem; margin-bottom: 15px; }
         .service-card p { color: #888; font-size: 0.95rem; }
 
-        /* Map Section */
+        /* قسم الخريطة */
         .map-section { padding: 80px 20px; background: var(--black); }
         .map-container { width: 100%; max-width: 1100px; height: 480px; margin: 40px auto; border-radius: 30px; overflow: hidden; border: 3px solid var(--gold); box-shadow: 0 15px 40px rgba(0,0,0,0.7); }
 
-        /* Contact Bar */
+        /* أزرار التواصل العائمة */
         .contact-bar { position: fixed; bottom: 25px; left: 50%; transform: translateX(-50%); display: flex; gap: 20px; z-index: 1000; width: 95%; max-width: 550px; }
         .btn { flex: 1; padding: 18px; border-radius: 50px; text-decoration: none; font-weight: bold; text-align: center; display: flex; align-items: center; justify-content: center; gap: 12px; box-shadow: 0 15px 30px rgba(0,0,0,0.6); transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); font-size: 1.1rem; }
         .btn-wa { background: #25d366; color: white; }
@@ -71,7 +71,7 @@
         footer p { color: #555; }
         footer .dev-credit { margin-top: 15px; color: var(--gold); font-weight: bold; font-size: 0.9rem; }
 
-        /* Custom Swiper Styles */
+        /* أزرار Swiper */
         .swiper-button-next, .swiper-button-prev { color: var(--gold) !important; transform: scale(0.8); }
         .swiper-pagination-bullet-active { background: var(--gold) !important; }
     </style>
@@ -80,7 +80,7 @@
 
     <header>
         <h1>⭐ GOLDEN STAR ⭐</h1>
-        <p>الرفاهية الحقيقية والخدمة الفندقية الراقية في قلب مدينة المخا</p>
+        <p>فخامة الإقامة والخدمة الملكية في قلب مدينة المخا</p>
     </header>
 
     <section class="gallery-section">
@@ -96,17 +96,17 @@
     <section class="services">
         <h2 class="section-title">لماذا جولدن استار؟</h2>
         <div class="services-grid">
-            <div class="service-card"><i class="fas fa-snowflake"></i><h3>تكييف مركزي</h3><p>أحدث أنظمة التبريد العالمية لضمان راحتك طوال العام.</p></div>
-            <div class="service-card"><i class="fas fa-wifi"></i><h3>إنترنت فائق السرعة</h3><p>ابقَ على اتصال دائم مع خدمة الواي فاي المجانية في كل ركن.</p></div>
-            <div class="service-card"><i class="fas fa-car"></i><h3>مواقف سيارات</h3><p>مساحات واسعة ومؤمنة مخصصة لضيوفنا الكرام.</p></div>
-            <div class="service-card"><i class="fas fa-concierge-bell"></i><h3>خدمة 24 ساعة</h3><p>فريقنا المتفاني جاهز لخدمتكم وتلبية طلباتكم في أي وقت.</p></div>
+            <div class="service-card"><i class="fas fa-snowflake"></i><h3>تكييف مركزي</h3><p>راحة تامة في جميع الغرف والأجنحة طوال العام.</p></div>
+            <div class="service-card"><i class="fas fa-wifi"></i><h3>إنترنت مجاني</h3><p>سرعة عالية للتواصل والعمل من داخل الفندق.</p></div>
+            <div class="service-card"><i class="fas fa-car"></i><h3>مواقف واسعة</h3><p>مواقف سيارات آمنة ومخصصة لنزلاء الفندق.</p></div>
+            <div class="service-card"><i class="fas fa-concierge-bell"></i><h3>خدمة 24 ساعة</h3><p>فريقنا في خدمتكم لتلبية احتياجاتكم في أي وقت.</p></div>
         </div>
     </section>
 
     <section class="map-section">
         <h2 class="section-title">موقعنا في المخا</h2>
         <div class="map-container">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3876.123456789!2d43.25!3d13.31!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x160f2526f6d20369%3A0x755bd9cc6118c3f9!2zZm9uZG9xIGdvbGRlbiBzdGFy!5e0!3m2!1sar!2sye!4v1715000000000!5m2!1sar!2sye" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            <iframe src="https://developers.google.com/maps/documentation/places/web-service/place-id#save-id5" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
         </div>
     </section>
 
@@ -122,8 +122,8 @@
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
-        // مصفوفة البيانات الشاملة لجميع الروابط
-        const hotelData = [
+        // مصفوفة الروابط التي تم جمعها
+        const imagesData = [
             { url: "https://maps.app.goo.gl/v1VDGB4MPEfoUSVu5?g_st=ac", tag: "visitor", title: "عدسة الزوار" },
             { url: "https://maps.app.goo.gl/qW9WoFJfZj3a6xAQ8?g_st=ac", tag: "visitor", title: "عدسة الزوار" },
             { url: "https://maps.app.goo.gl/RtVMR3esbWmVPJ9T9?g_st=ac", tag: "visitor", title: "زوايا حقيقية" },
@@ -144,27 +144,27 @@
 
         const wrapper = document.getElementById('galleryWrapper');
 
-        // إنشاء السلايدات برمجياً
-        hotelData.forEach(item => {
+        // بناء محتوى المعرض تلقائياً
+        imagesData.forEach(item => {
             const badgeClass = item.tag === 'visitor' ? 'badge visitor' : 'badge';
             const icon = item.tag === 'visitor' ? '<i class="fas fa-camera"></i>' : '<i class="fas fa-bed"></i>';
             
             wrapper.innerHTML += `
                 <div class="swiper-slide">
                     <span class="${badgeClass}">${icon} ${item.title}</span>
-                    <img src="${item.url}" alt="Golden Star Hotel">
-                    <div class="img-info"><h3>فخامة تستحقها</h3></div>
+                    <img src="${item.url}" alt="فندق جولدن استار المخا">
+                    <div class="img-info"><h3>تجربة لا تُنسى</h3></div>
                 </div>`;
         });
 
-        // تفعيل محرك العرض
+        // تشغيل Swiper
         const swiper = new Swiper('.swiper', {
             loop: true,
-            effect: 'fade', // تلاشي فني
+            effect: 'fade',
             fadeEffect: { crossFade: true },
             autoplay: {
-                delay: 4500,
-                disableOnInteraction: true, // يتوقف عند تفاعل المستخدم ليتمكن من الرؤية
+                delay: 4000,
+                disableOnInteraction: true, // يتوقف عند تفاعل الزائر للتمعن في الصور
             },
             pagination: { el: '.swiper-pagination', clickable: true },
             navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
