@@ -9,127 +9,165 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <style>
-        :root { --gold: #D4AF37; --black: #080808; --surface: #151515; --white: #ffffff; }
+        :root { 
+            --gold: #D4AF37; 
+            --dark-gold: #996515;
+            --black: #050505; 
+            --surface: #121212; 
+            --white: #ffffff; 
+        }
         
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, sans-serif; }
-        body { background: var(--black); color: var(--white); line-height: 1.6; }
+        body { background: var(--black); color: var(--white); line-height: 1.6; overflow-x: hidden; }
 
         /* Header */
-        header { background: linear-gradient(to bottom, #1a1a1a, var(--black)); padding: 40px 20px; text-align: center; border-bottom: 2px solid var(--gold); }
-        header h1 { color: var(--gold); font-size: 2.5rem; letter-spacing: 2px; margin-bottom: 10px; }
-        header p { color: #888; font-size: 1.1rem; }
+        header { 
+            background: linear-gradient(to bottom, #1a1a1a, var(--black)); 
+            padding: 50px 20px; 
+            text-align: center; 
+            border-bottom: 2px solid var(--gold); 
+        }
+        header h1 { color: var(--gold); font-size: 2.8rem; letter-spacing: 2px; margin-bottom: 10px; text-shadow: 0 4px 15px rgba(212,175,55,0.3); }
+        header p { color: #aaa; font-size: 1.2rem; max-width: 600px; margin: 0 auto; }
 
         /* Gallery Section */
-        .swiper { width: 100%; max-width: 1100px; height: 600px; margin: 40px auto; border-radius: 20px; border: 1px solid rgba(212, 175, 55, 0.3); overflow: hidden; }
-        .swiper-slide { position: relative; background: #000; }
-        .swiper-slide img { width: 100%; height: 100%; object-fit: cover; transition: transform 8s linear; filter: brightness(1.1); }
-        .swiper-slide-active img { transform: scale(1.2); }
+        .gallery-section { padding: 40px 0; }
+        .swiper { width: 100%; max-width: 1100px; height: 650px; margin: 0 auto; border-radius: 25px; border: 2px solid rgba(212, 175, 55, 0.3); box-shadow: 0 20px 50px rgba(0,0,0,0.9); }
+        .swiper-slide { position: relative; background: #000; overflow: hidden; }
+        .swiper-slide img { width: 100%; height: 100%; object-fit: cover; transition: transform 10s linear; filter: brightness(1.1); }
+        .swiper-slide-active img { transform: scale(1.25); }
         
-        .badge { position: absolute; top: 20px; right: 20px; background: var(--gold); color: black; padding: 8px 18px; border-radius: 5px; font-weight: bold; z-index: 10; box-shadow: 0 4px 15px rgba(0,0,0,0.5); }
+        /* Badges */
+        .badge { position: absolute; top: 25px; right: 25px; background: var(--gold); color: black; padding: 10px 22px; border-radius: 8px; font-weight: bold; z-index: 10; box-shadow: 0 5px 20px rgba(0,0,0,0.6); font-size: 0.9rem; }
         .badge.visitor { background: #fff; color: #333; }
+
+        .img-info { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent, rgba(0,0,0,0.95)); padding: 60px 30px 30px; text-align: right; z-index: 5; }
+        .img-info h3 { color: var(--gold); font-size: 1.8rem; margin: 0; }
 
         /* Services Section */
         .services { padding: 80px 20px; background: var(--surface); }
-        .section-title { text-align: center; color: var(--gold); font-size: 2rem; margin-bottom: 50px; }
-        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; max-width: 1200px; margin: 0 auto; }
-        .service-card { background: var(--black); padding: 40px 20px; border-radius: 15px; text-align: center; border: 1px solid #222; transition: 0.3s; }
-        .service-card:hover { border-color: var(--gold); transform: translateY(-10px); }
-        .service-card i { font-size: 3rem; color: var(--gold); margin-bottom: 20px; }
+        .section-title { text-align: center; color: var(--gold); font-size: 2.2rem; margin-bottom: 50px; position: relative; }
+        .section-title::after { content: ''; width: 60px; height: 3px; background: var(--gold); position: absolute; bottom: -10px; right: 50%; transform: translateX(50%); }
+        
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 30px; max-width: 1200px; margin: 0 auto; }
+        .service-card { background: var(--black); padding: 45px 25px; border-radius: 20px; text-align: center; border: 1px solid #222; transition: 0.4s ease; }
+        .service-card:hover { border-color: var(--gold); transform: translateY(-10px); box-shadow: 0 10px 30px rgba(212,175,55,0.1); }
+        .service-card i { font-size: 3.5rem; color: var(--gold); margin-bottom: 25px; }
+        .service-card h3 { font-size: 1.5rem; margin-bottom: 15px; }
+        .service-card p { color: #888; font-size: 0.95rem; }
 
         /* Map Section */
-        .map-section { padding: 60px 20px; text-align: center; }
-        .map-container { width: 100%; max-width: 1100px; height: 450px; margin: 30px auto; border-radius: 20px; overflow: hidden; border: 2px solid var(--gold); }
+        .map-section { padding: 80px 20px; background: var(--black); }
+        .map-container { width: 100%; max-width: 1100px; height: 480px; margin: 40px auto; border-radius: 30px; overflow: hidden; border: 3px solid var(--gold); box-shadow: 0 15px 40px rgba(0,0,0,0.7); }
 
-        /* Floating Contact Buttons */
-        .contact-bar { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); display: flex; gap: 15px; z-index: 1000; width: 90%; max-width: 500px; }
-        .btn { flex: 1; padding: 15px; border-radius: 50px; text-decoration: none; font-weight: bold; text-align: center; display: flex; align-items: center; justify-content: center; gap: 10px; box-shadow: 0 10px 20px rgba(0,0,0,0.5); transition: 0.3s; }
+        /* Contact Bar */
+        .contact-bar { position: fixed; bottom: 25px; left: 50%; transform: translateX(-50%); display: flex; gap: 20px; z-index: 1000; width: 95%; max-width: 550px; }
+        .btn { flex: 1; padding: 18px; border-radius: 50px; text-decoration: none; font-weight: bold; text-align: center; display: flex; align-items: center; justify-content: center; gap: 12px; box-shadow: 0 15px 30px rgba(0,0,0,0.6); transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); font-size: 1.1rem; }
         .btn-wa { background: #25d366; color: white; }
         .btn-call { background: var(--gold); color: black; }
-        .btn:hover { transform: scale(1.05); }
+        .btn:hover { transform: scale(1.08) translateY(-5px); }
 
-        footer { text-align: center; padding: 100px 20px 120px; color: #555; font-size: 0.9rem; }
+        footer { text-align: center; padding: 120px 20px 150px; background: var(--black); border-top: 1px solid #222; }
+        footer p { color: #555; }
+        footer .dev-credit { margin-top: 15px; color: var(--gold); font-weight: bold; font-size: 0.9rem; }
+
+        /* Custom Swiper Styles */
+        .swiper-button-next, .swiper-button-prev { color: var(--gold) !important; transform: scale(0.8); }
+        .swiper-pagination-bullet-active { background: var(--gold) !important; }
     </style>
 </head>
 <body>
 
     <header>
         <h1>⭐ GOLDEN STAR ⭐</h1>
-        <p>فخامة الإقامة.. في قلب المخا</p>
+        <p>الرفاهية الحقيقية والخدمة الفندقية الراقية في قلب مدينة المخا</p>
     </header>
 
-    <div class="swiper">
-        <div class="swiper-wrapper" id="galleryWrapper"></div>
-        <div class="swiper-pagination"></div>
-        <div class="swiper-button-next"></div>
-        <div class="swiper-button-prev"></div>
-    </div>
+    <section class="gallery-section">
+        <div class="swiper">
+            <div class="swiper-wrapper" id="galleryWrapper">
+                </div>
+            <div class="swiper-pagination"></div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+        </div>
+    </section>
 
     <section class="services">
-        <h2 class="section-title">خدماتنا الملكية</h2>
+        <h2 class="section-title">لماذا جولدن استار؟</h2>
         <div class="services-grid">
-            <div class="service-card"><i class="fas fa-snowflake"></i><h3>تكييف مركزي</h3><p>راحة تامة في جميع الأجواء</p></div>
-            <div class="service-card"><i class="fas fa-wifi"></i><h3>إنترنت مجاني</h3><p>سرعة عالية في جميع المرافق</p></div>
-            <div class="service-card"><i class="fas fa-car"></i><h3>مواقف سيارات</h3><p>مساحات واسعة وآمنة 24 ساعة</p></div>
-            <div class="service-card"><i class="fas fa-utensils"></i><h3>مطعم فاخر</h3><p>أشهى المأكولات اليمنية والعالمية</p></div>
+            <div class="service-card"><i class="fas fa-snowflake"></i><h3>تكييف مركزي</h3><p>أحدث أنظمة التبريد العالمية لضمان راحتك طوال العام.</p></div>
+            <div class="service-card"><i class="fas fa-wifi"></i><h3>إنترنت فائق السرعة</h3><p>ابقَ على اتصال دائم مع خدمة الواي فاي المجانية في كل ركن.</p></div>
+            <div class="service-card"><i class="fas fa-car"></i><h3>مواقف سيارات</h3><p>مساحات واسعة ومؤمنة مخصصة لضيوفنا الكرام.</p></div>
+            <div class="service-card"><i class="fas fa-concierge-bell"></i><h3>خدمة 24 ساعة</h3><p>فريقنا المتفاني جاهز لخدمتكم وتلبية طلباتكم في أي وقت.</p></div>
         </div>
     </section>
 
     <section class="map-section">
         <h2 class="section-title">موقعنا في المخا</h2>
         <div class="map-container">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3871.9332!2d43.2500!3d13.3100!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTPCsDE4JzM2LjAiTiA0M8KwMTUnMDAuMCJF!5e0!3m2!1sar!2sye!4v1620000000000!5m2!1sar!2sye" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3876.123456789!2d43.25!3d13.31!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x160f2526f6d20369%3A0x755bd9cc6118c3f9!2zZm9uZG9xIGdvbGRlbiBzdGFy!5e0!3m2!1sar!2sye!4v1715000000000!5m2!1sar!2sye" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
         </div>
     </section>
 
     <footer>
         <p>جميع الحقوق محفوظة © 2026 فندق جولدن استار - المخا</p>
-        <p style="margin-top: 10px; color: var(--gold);">تطوير: Mashaal Abdu</p>
+        <div class="dev-credit">Developed by Mashaal Abdu</div>
     </footer>
 
     <div class="contact-bar">
         <a href="tel:+967779444468" class="btn btn-call"><i class="fas fa-phone"></i> اتصل الآن</a>
-        <a href="https://wa.me/967779444468" class="btn btn-wa"><i class="fab fa-whatsapp"></i> واتساب</a>
+        <a href="https://wa.me/967779444468" class="btn btn-wa"><i class="fab fa-whatsapp"></i> حجز واتساب</a>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
-        const galleryImages = [
-            {url: "https://maps.app.goo.gl/v1VDGB4MPEfoUSVu5?g_st=ac", type: "visitor"},
-            {url: "https://maps.app.goo.gl/qW9WoFJfZj3a6xAQ8?g_st=ac", type: "visitor"},
-            {url: "https://maps.app.goo.gl/RtVMR3esbWmVPJ9T9?g_st=ac", type: "visitor"},
-            {url: "https://maps.app.goo.gl/to5tz3GKvjeNRMoG8?g_st=ac", type: "room"},
-            {url: "https://maps.app.goo.gl/zswVVPH8mg6fZkHL8?g_st=ac", type: "room"},
-            {url: "https://maps.app.goo.gl/UcrYUPAmLEXN9g8F7?g_st=ac", type: "room"},
-            {url: "https://maps.app.goo.gl/EN6HauWh62p6azcBA?g_st=ac", type: "room"},
-            {url: "https://maps.app.goo.gl/T8DYNahpnQjJqX3R6?g_st=ac", type: "room"},
-            {url: "https://maps.app.goo.gl/oNEKBovHtfp17TFn8?g_st=ac", type: "room"},
-            {url: "https://maps.app.goo.gl/CoiZfC1GvVckiuC28?g_st=ac", type: "room"},
-            {url: "https://maps.app.goo.gl/RwomK7MrhdYDaCDL6?g_st=ac", type: "room"},
-            {url: "https://maps.app.goo.gl/tEYxz1XeLiK5A8xd8?g_st=ac", type: "room"},
-            {url: "https://maps.app.goo.gl/iyqFjjynLudTCExT7?g_st=ac", type: "room"},
-            {url: "https://maps.app.goo.gl/gr33Dc28WPN3GoJP8?g_st=ac", type: "room"},
-            {url: "https://maps.app.goo.gl/qgeUkrJrHvkrYNMe8?g_st=ac", type: "room"},
-            {url: "https://maps.app.goo.gl/SkAxhCHWJfvNdkRK6?g_st=ac", type: "room"}
+        // مصفوفة البيانات الشاملة لجميع الروابط
+        const hotelData = [
+            { url: "https://maps.app.goo.gl/v1VDGB4MPEfoUSVu5?g_st=ac", tag: "visitor", title: "عدسة الزوار" },
+            { url: "https://maps.app.goo.gl/qW9WoFJfZj3a6xAQ8?g_st=ac", tag: "visitor", title: "عدسة الزوار" },
+            { url: "https://maps.app.goo.gl/RtVMR3esbWmVPJ9T9?g_st=ac", tag: "visitor", title: "زوايا حقيقية" },
+            { url: "https://maps.app.goo.gl/to5tz3GKvjeNRMoG8?g_st=ac", tag: "room", title: "الأجنحة الملكية" },
+            { url: "https://maps.app.goo.gl/zswVVPH8mg6fZkHL8?g_st=ac", tag: "room", title: "غرف فخمة" },
+            { url: "https://maps.app.goo.gl/UcrYUPAmLEXN9g8F7?g_st=ac", tag: "room", title: "إطلالة البرجين" },
+            { url: "https://maps.app.goo.gl/EN6HauWh62p6azcBA?g_st=ac", tag: "room", title: "الأجنحة" },
+            { url: "https://maps.app.goo.gl/T8DYNahpnQjJqX3R6?g_st=ac", tag: "room", title: "غرف فاخرة" },
+            { url: "https://maps.app.goo.gl/oNEKBovHtfp17TFn8?g_st=ac", tag: "room", title: "تفاصيل الإقامة" },
+            { url: "https://maps.app.goo.gl/CoiZfC1GvVckiuC28?g_st=ac", tag: "room", title: "جودة الضيافة" },
+            { url: "https://maps.app.goo.gl/RwomK7MrhdYDaCDL6?g_st=ac", tag: "room", title: "الراحة الفندقية" },
+            { url: "https://maps.app.goo.gl/tEYxz1XeLiK5A8xd8?g_st=ac", tag: "room", title: "الأجنحة" },
+            { url: "https://maps.app.goo.gl/iyqFjjynLudTCExT7?g_st=ac", tag: "room", title: "جولدن استار" },
+            { url: "https://maps.app.goo.gl/gr33Dc28WPN3GoJP8?g_st=ac", tag: "room", title: "إدارة الفندق" },
+            { url: "https://maps.app.goo.gl/qgeUkrJrHvkrYNMe8?g_st=ac", tag: "room", title: "خدماتنا" },
+            { url: "https://maps.app.goo.gl/SkAxhCHWJfvNdkRK6?g_st=ac", tag: "room", title: "البرج الشرقي" }
         ];
 
         const wrapper = document.getElementById('galleryWrapper');
-        galleryImages.forEach(img => {
-            const badgeText = img.type === 'visitor' ? '📸 عدسة الزوار' : '🛏️ أجنحة الفندق';
-            const badgeClass = img.type === 'visitor' ? 'badge visitor' : 'badge';
+
+        // إنشاء السلايدات برمجياً
+        hotelData.forEach(item => {
+            const badgeClass = item.tag === 'visitor' ? 'badge visitor' : 'badge';
+            const icon = item.tag === 'visitor' ? '<i class="fas fa-camera"></i>' : '<i class="fas fa-bed"></i>';
+            
             wrapper.innerHTML += `
                 <div class="swiper-slide">
-                    <span class="${badgeClass}">${badgeText}</span>
-                    <img src="${img.url}" alt="Golden Star Hotel">
+                    <span class="${badgeClass}">${icon} ${item.title}</span>
+                    <img src="${item.url}" alt="Golden Star Hotel">
+                    <div class="img-info"><h3>فخامة تستحقها</h3></div>
                 </div>`;
         });
 
+        // تفعيل محرك العرض
         const swiper = new Swiper('.swiper', {
             loop: true,
-            autoplay: { delay: 4000, disableOnInteraction: true },
-            navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
-            pagination: { el: '.swiper-pagination', clickable: true },
-            effect: 'fade',
+            effect: 'fade', // تلاشي فني
             fadeEffect: { crossFade: true },
+            autoplay: {
+                delay: 4500,
+                disableOnInteraction: true, // يتوقف عند تفاعل المستخدم ليتمكن من الرؤية
+            },
+            pagination: { el: '.swiper-pagination', clickable: true },
+            navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
         });
     </script>
 </body>
