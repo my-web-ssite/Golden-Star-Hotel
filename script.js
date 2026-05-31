@@ -3,11 +3,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const images = wrapper.querySelectorAll("img");
     let index = 0;
 
-    function startSlider() {
+    setInterval(() => {
         index++;
         if (index >= images.length) index = 0;
         wrapper.style.transform = `translateX(${-index * 100}%)`;
-    }
-
-    setInterval(startSlider, 3500); // 3.5 ثوانٍ لكل صورة
+    }, 3500);
 });
