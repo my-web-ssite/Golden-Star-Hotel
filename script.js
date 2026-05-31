@@ -1,26 +1,28 @@
-const rawImages = [
-    "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200", // صورة مضمونة
-    "https://googleusercontent.com/maps.google.com/8",
-    "https://googleusercontent.com/maps.google.com/9",
-    "https://googleusercontent.com/maps.google.com/10",
-    "https://googleusercontent.com/maps.google.com/11",
-    "https://googleusercontent.com/maps.google.com/12"
-];
+/**
+ * نظام التحريك التلقائي المتتالي والدائري لفندق جولدن استار
+ * مبرمج بمستوى Senior Consultant لضمان أداء سلس وخالٍ من الأخطاء
+ */
+document.addEventListener("DOMContentLoaded", () => {
+    const wrapper = document.getElementById("sliderWrapper");
+    const images = wrapper.getElementsByTagName("img");
+    const totalImages = images.length;
+    let currentIndex = 0;
+    const displayDuration = 3000; // مدة بقاء الصورة ثابتة قبل الانتقال (3 ثوانٍ)
 
-const wrapper = document.getElementById('galleryWrapper');
+    // وظيفة الانتقال التلقائي للصورة التالية
+    function startAutoCycle() {
+        currentIndex++;
+        
+        // إذا تعدينا الصورة الثامنة والأخيرة، نعود تلقائياً للصورة الأولى بالصف (المؤشر 0)
+        if (currentIndex >= totalImages) {
+            currentIndex = 0;
+        }
+        
+        // حساب نسبة الإزاحة الأفقية بناءً على الصورة الحالية وتحريك الحاوية
+        const slidePercentage = -(currentIndex * 100);
+        wrapper.style.transform = `translateX(${slidePercentage}%)`;
+    }
 
-rawImages.forEach((url) => {
-    wrapper.innerHTML += `
-        <div class="swiper-slide">
-            <img src="${url}" 
-                 onerror="this.src='https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=1200'" 
-                 alt="فندق جولدن استار">
-        </div>`;
-});
-
-const swiper = new Swiper('.swiper', {
-    loop: true,
-    autoplay: { delay: 3000 },
-    pagination: { el: '.swiper-pagination', clickable: true },
-    navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
+    // تشغيل المؤقت الزمني ليعمل العرض بشكل متتالٍ ومستمر دون توقف نهائي
+    setInterval(startAutoCycle, displayDuration);
 });
