@@ -1,28 +1,18 @@
-/**
- * نظام التحريك التلقائي المتتالي والدائري لفندق جولدن استار
- * مبرمج بمستوى Senior Consultant لضمان أداء سلس وخالٍ من الأخطاء
- */
-document.addEventListener("DOMContentLoaded", () => {
-    const wrapper = document.getElementById("sliderWrapper");
-    const images = wrapper.getElementsByTagName("img");
-    const totalImages = images.length;
-    let currentIndex = 0;
-    const displayDuration = 3000; // مدة بقاء الصورة ثابتة قبل الانتقال (3 ثوانٍ)
+// مبرمج ليعمل بشكل دائري بدون توقف
+const wrap = document.getElementById("mainSlider");
+const imgs = wrap.getElementsByTagName("img");
+let step = 0;
 
-    // وظيفة الانتقال التلقائي للصورة التالية
-    function startAutoCycle() {
-        currentIndex++;
-        
-        // إذا تعدينا الصورة الثامنة والأخيرة، نعود تلقائياً للصورة الأولى بالصف (المؤشر 0)
-        if (currentIndex >= totalImages) {
-            currentIndex = 0;
-        }
-        
-        // حساب نسبة الإزاحة الأفقية بناءً على الصورة الحالية وتحريك الحاوية
-        const slidePercentage = -(currentIndex * 100);
-        wrapper.style.transform = `translateX(${slidePercentage}%)`;
+function moveSlider() {
+    step++;
+    // إذا وصل للصورة الثامنة (رقم 7 في البرمجة) يصفر العداد ليعود للأولى
+    if (step >= imgs.length) {
+        step = 0;
     }
+    // تحريك الصور بناءً على العرض
+    wrap.style.transform = `translateX(${step * 100}%)`; 
+    // ملاحظة: استخدمنا + أو - حسب اتجاه اللغة، في RTL نستخدم الموجب للتحريك لليسار
+}
 
-    // تشغيل المؤقت الزمني ليعمل العرض بشكل متتالٍ ومستمر دون توقف نهائي
-    setInterval(startAutoCycle, displayDuration);
-});
+// العرض يتحرك تلقائياً كل 3 ثوانٍ
+setInterval(moveSlider, 3000);
