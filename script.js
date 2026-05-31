@@ -1,23 +1,13 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const wrap = document.getElementById("mainSlider");
-    const imgs = wrap.getElementsByTagName("img");
-    const total = imgs.length;
-    let step = 0;
-    const delay = 3000; // 3 ثوانٍ لكل صورة
+    const wrapper = document.getElementById("sliderWrapper");
+    const images = wrapper.querySelectorAll("img");
+    let index = 0;
 
-    function autoPlay() {
-        step++;
-        
-        // إذا وصلنا لآخر صورة، نعود فوراً للبداية
-        if (step >= total) {
-            step = 0;
-        }
-        
-        // التحريك بنسبة 100% لكل صورة
-        // نستخدم القيمة السالبة للتحريك لليسار في الأنظمة التي تدعم الاتجاه العربي
-        wrap.style.transform = `translateX(${-step * 100}%)`;
+    function startSlider() {
+        index++;
+        if (index >= images.length) index = 0;
+        wrapper.style.transform = `translateX(${-index * 100}%)`;
     }
 
-    // تشغيل العرض المتتالي التلقائي
-    setInterval(autoPlay, delay);
+    setInterval(startSlider, 3500); // 3.5 ثوانٍ لكل صورة
 });
