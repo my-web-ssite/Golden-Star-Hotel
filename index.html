@@ -3,108 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>معاينة فندق جولدن استار</title>
+    <title>عرض فندق جولدن استار</title>
     <style>
-        /* تصاوير عامة وتنسيق الصفحة */
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f4f6f9;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-        }
-
-        /* حاوية العرض الرئيسية للموقع */
-        .showcase-container {
-            width: 90%;
-            max-width: 1100px;
-            background: #ffffff;
-            padding: 20px;
-            border-radius: 16px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-            text-align: center;
-        }
-
-        .showcase-title {
-            color: #1a1a1a;
-            margin-bottom: 5px;
-            font-size: 24px;
-        }
-
-        .showcase-subtitle {
-            color: #777;
-            font-size: 14px;
-            margin-bottom: 20px;
-        }
-
-        /* حاوية السلايدر (إطار العرض المخفي) */
-        .slider-container {
-            width: 100%;
-            overflow: hidden; /* يمنع ظهور الصور الأخرى خارج الإطار */
-            border-radius: 12px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-            position: relative;
-        }
-
-        /* الحاوية الطولية المتحركة للصور */
-        .slider-wrapper {
-            display: flex;
-            width: 100%;
-            transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1); /* انتقال انسيابي فخم */
-        }
-
-        /* تنسيق الصور الفردية داخل السلايدر */
-        .slider-wrapper img {
-            width: 100%;
-            flex-shrink: 0; /* يمنع انضغاط أو تشوه أبعاد الصورة */
-            height: 500px; /* الارتفاع المثالي للشاشات */
-            object-fit: cover; /* لملء المساحة بشكل ذكي بدون تمديد خاطئ */
-        }
-
-        /* تنبيه أسفل العرض مخصص لإقناع العميل */
-        .client-notice {
-            margin-top: 15px;
-            background-color: #fff9e6;
-            border-right: 4px solid #ffcc00;
-            padding: 12px;
-            border-radius: 4px;
-            color: #856404;
-            font-size: 14px;
-            font-weight: 500;
-        }
+        body { margin: 0; background: #111; display: flex; justify-content: center; align-items: center; min-height: 100vh; font-family: sans-serif; }
+        .slider-box { width: 95%; max-width: 900px; overflow: hidden; border-radius: 15px; position: relative; border: 3px solid #d4af37; }
+        .slider-wrap { display: flex; transition: transform 0.8s ease-in-out; }
+        .slider-wrap img { width: 100%; flex-shrink: 0; height: 500px; object-fit: cover; }
+        .label { position: absolute; bottom: 20px; right: 20px; background: rgba(0,0,0,0.7); color: #d4af37; padding: 10px 20px; border-radius: 5px; }
     </style>
 </head>
 <body>
 
-    <div class="showcase-container">
-        <h2 class="showcase-title">فندق جولدن استار - العرض البصري المقترح</h2>
-        <p class="showcase-subtitle">نظام عرض متتالي تلقائي ذكي ومستمر</p>
-
-        <!-- بداية السلايدر الذكي -->
-        <div class="slider-container">
-            <div class="slider-wrapper" id="sliderWrapper">
-                <!-- تم ربط الأسماء الـ 8 التي رفعتها مباشرة بناءً على مسار مجلد الصور الافتراضي -->
-                <img src="assets/images/Gemini_Generated_Image_wt8rpywt8rpywt8r.png" alt="واجهة الفندق">
-                <img src="assets/images/Gemini_Generated_Image_dwo522dwo522dwo5.png" alt="جناح مطل">
-                <img src="assets/images/Gemini_Generated_Image_ijop19ijop19ijop.png" alt="المطعم البانورامي">
-                <img src="assets/images/Gemini_Generated_Image_o64me5o64me5o64m.png" alt="صالة الاستراحة">
-                <img src="assets/images/Gemini_Generated_Image_hizxbahizxbahizx.png" alt="الاستقبال">
-                <img src="assets/images/Gemini_Generated_Image_is5k6cis5k6cis5k.png" alt="الممر الداخلي">
-                <img src="assets/images/Gemini_Generated_Image_3f6bge3f6bge3f6b.png" alt="بوفيه الطعام">
-                <img src="assets/images/Gemini_Generated_Image_s9rd4gs9rd4gs9rd.png" alt="تراس السطح">
-            </div>
+    <div class="slider-box">
+        <div class="slider-wrap" id="mainSlider">
+            <img src="Gemini_Generated_Image_wt8rpywt8rpywt8r.png">
+            <img src="Gemini_Generated_Image_dwo522dwo522dwo5.png">
+            <img src="Gemini_Generated_Image_ijop19ijop19ijop.png">
+            <img src="Gemini_Generated_Image_o64me5o64me5o64m.png">
+            <img src="Gemini_Generated_Image_hizxbahizxbahizx.png">
+            <img src="Gemini_Generated_Image_is5k6cis5k6cis5k.png">
+            <img src="Gemini_Generated_Image_3f6bge3f6bge3f6b.png">
+            <img src="Gemini_Generated_Image_s9rd4gs9rd4gs9rd.png">
         </div>
-        <!-- نهاية السلايدر -->
-
-        <div class="client-notice">
-            💡 <strong>ملاحظة للمعاينة:</strong> الصور الحالية هي نماذج محاكاة افتراضية، ويمكننا استبدالها فوراً وبسهولة بالصور الفوتوغرافية الحقيقية التي تختارها للفندق.
-        </div>
+        <div class="label">معاينة فندق جولدن استار</div>
     </div>
 
-    <!-- ربط ملف الـ JavaScript المسؤول عن التحريك الدائري المتتالي -->
     <script src="script.js"></script>
 </body>
 </html>
