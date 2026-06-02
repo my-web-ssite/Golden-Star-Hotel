@@ -3,8 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>فندق المخا - الصفحة الرئيسية</title>
+    <title>فندق جولدن ستار - المخا | Golden Star Hotel</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
+        :root {
+            --primary: #0d1b2a;
+            --primary-light: #1b2d45;
+            --gold: #c9a84c;
+            --gold-light: #e0c97a;
+            --gold-dark: #a8882e;
+            --white: #ffffff;
+            --light: #faf8f3;
+            --gray: #9ca3af;
+            --transition: 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -12,262 +27,578 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f5f5f5;
-            color: #333;
-            line-height: 1.6;
+            font-family: 'Segoe UI', 'Cairo', Tahoma, sans-serif;
+            background: #0a0f16;
+            color: #e5e7eb;
+            line-height: 1.8;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
         }
 
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        header {
-            background: linear-gradient(135deg, #1e3c72, #2a5298);
-            color: white;
-            text-align: center;
-            padding: 40px 20px;
-            border-radius: 0 0 20px 20px;
-            margin-bottom: 30px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-        }
-
-        header h1 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-        }
-
-        header p {
-            font-size: 1.2rem;
-            opacity: 0.9;
-        }
-
-        /* Slideshow */
-        .slideshow-container {
-            position: relative;
+        /* ========== PRELOADER ========== */
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
-            max-width: 800px;
-            margin: 0 auto 40px;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
-            background: #000;
-        }
-
-        .slide {
-            display: none;
-            width: 100%;
-            aspect-ratio: 16 / 9;
-            object-fit: cover;
-            transition: opacity 0.8s ease-in-out;
-        }
-
-        .slide.active {
-            display: block;
-            animation: fadeIn 0.8s;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0.4; }
-            to { opacity: 1; }
-        }
-
-        /* Contact Info */
-        .info-section {
-            background: white;
-            border-radius: 15px;
-            padding: 30px;
-            margin: 20px 0;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            display: flex;
-            flex-wrap: wrap;
-            gap: 30px;
-            justify-content: space-between;
-            align-items: flex-start;
-        }
-
-        .contact-details {
-            flex: 1 1 300px;
-        }
-
-        .contact-details h2 {
-            color: #1e3c72;
-            margin-bottom: 20px;
-            border-bottom: 3px solid #2a5298;
-            display: inline-block;
-            padding-bottom: 5px;
-        }
-
-        .contact-item {
+            height: 100%;
+            background: #080c12;
             display: flex;
             align-items: center;
-            margin-bottom: 15px;
-            font-size: 1.1rem;
+            justify-content: center;
+            z-index: 10000;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
         }
-
-        .contact-item .icon {
-            font-size: 1.5rem;
-            margin-left: 10px;
-            width: 30px;
-            text-align: center;
+        #preloader.hidden {
+            opacity: 0;
+            visibility: hidden;
         }
-
-        .phone-number {
-            color: #2a5298;
-            font-weight: bold;
-            text-decoration: none;
-            font-size: 1.3rem;
-            transition: color 0.3s;
+        .loader-ring {
+            width: 70px;
+            height: 70px;
+            border: 3px solid rgba(201,168,76,0.2);
+            border-top-color: var(--gold);
+            border-radius: 50%;
+            animation: spin 0.9s linear infinite;
         }
+        @keyframes spin { to { transform: rotate(360deg); } }
 
-        .phone-number:hover {
-            color: #1e3c72;
-            text-decoration: underline;
-        }
-
-        .map-container {
-            flex: 1 1 300px;
-            min-height: 250px;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-        }
-
-        .map-container iframe {
+        /* ========== NAVBAR ========== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
-            height: 250px;
+            z-index: 1000;
+            background: rgba(13, 27, 42, 0.9);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border-bottom: 1px solid rgba(201,168,76,0.2);
+            padding: 15px 0;
+            transition: var(--transition);
+        }
+        .navbar.scrolled {
+            padding: 10px 0;
+            background: rgba(13, 27, 42, 0.98);
+            box-shadow: 0 8px 40px rgba(0,0,0,0.5);
+        }
+        .nav-inner {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 25px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: var(--white);
+        }
+        .nav-logo i {
+            font-size: 2.2rem;
+            color: var(--gold);
+        }
+        .nav-logo .logo-name {
+            font-size: 1.6rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        .nav-logo .logo-name span {
+            color: var(--gold);
+        }
+        .nav-phone {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--gold-light);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            border: 2px solid var(--gold);
+            padding: 10px 22px;
+            border-radius: 50px;
+            transition: var(--transition);
+        }
+        .nav-phone:hover {
+            background: var(--gold);
+            color: var(--primary);
+        }
+
+        /* ========== HERO SLIDESHOW ========== */
+        .hero-slideshow {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+            margin-top: 0;
+        }
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1.2s ease-in-out;
+        }
+        .slide.active {
+            opacity: 1;
+        }
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+        .slide-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.5) 100%);
+        }
+        .slide-content {
+            position: absolute;
+            bottom: 15%;
+            right: 8%;
+            z-index: 10;
+            text-align: right;
+            max-width: 700px;
+        }
+        .slide-content .stars {
+            color: var(--gold);
+            font-size: 1.2rem;
+            letter-spacing: 4px;
+            margin-bottom: 15px;
+        }
+        .slide-content h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            color: var(--white);
+            line-height: 1.2;
+            margin-bottom: 10px;
+            text-shadow: 0 4px 30px rgba(0,0,0,0.6);
+        }
+        .slide-content h1 span {
+            color: var(--gold);
+        }
+        .slide-content .subtitle {
+            font-size: 1.3rem;
+            color: #d1d5db;
+            margin-bottom: 25px;
+        }
+
+        /* مؤشرات الشرائح */
+        .slide-indicators {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            z-index: 20;
+        }
+        .indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.4);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .indicator.active {
+            background: var(--gold);
+            width: 35px;
+            border-radius: 20px;
+        }
+
+        /* ========== INFO SECTION ========== */
+        .info-section {
+            max-width: 1200px;
+            margin: -80px auto 60px;
+            position: relative;
+            z-index: 50;
+            padding: 0 20px;
+        }
+        .info-card {
+            background: var(--primary-light);
+            border-radius: 20px;
+            padding: 40px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            border: 1px solid rgba(201,168,76,0.3);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+        }
+        .info-details h2 {
+            font-size: 2rem;
+            color: var(--gold);
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .info-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: rgba(255,255,255,0.03);
+            border-radius: 12px;
+            transition: var(--transition);
+        }
+        .info-item:hover {
+            background: rgba(255,255,255,0.06);
+        }
+        .info-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--gold);
+            color: var(--primary);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            flex-shrink: 0;
+        }
+        .info-text h3 {
+            color: var(--white);
+            font-size: 1rem;
+            margin-bottom: 4px;
+        }
+        .info-text p, .info-text a {
+            color: #d1d5db;
+            font-size: 1.05rem;
+            text-decoration: none;
+        }
+        .info-text a:hover {
+            color: var(--gold-light);
+        }
+        .map-wrapper {
+            border-radius: 16px;
+            overflow: hidden;
+            border: 2px solid rgba(201,168,76,0.3);
+            height: 100%;
+            min-height: 350px;
+        }
+        .map-wrapper iframe {
+            width: 100%;
+            height: 100%;
             border: none;
         }
-
-        .map-link {
-            display: inline-block;
-            margin-top: 15px;
-            background: #2a5298;
-            color: white;
-            padding: 10px 25px;
-            border-radius: 30px;
+        .btn-gold {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--gold);
+            color: var(--primary);
+            padding: 14px 30px;
+            border-radius: 50px;
             text-decoration: none;
-            font-weight: bold;
-            transition: background 0.3s;
+            font-weight: 700;
+            font-size: 1rem;
+            margin-top: 20px;
+            transition: var(--transition);
+        }
+        .btn-gold:hover {
+            background: var(--gold-light);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(201,168,76,0.4);
         }
 
-        .map-link:hover {
-            background: #1e3c72;
+        /* ========== GALLERY PREVIEW ========== */
+        .gallery-strip {
+            max-width: 1300px;
+            margin: 60px auto;
+            padding: 0 20px;
+            text-align: center;
+        }
+        .gallery-strip h2 {
+            font-size: 2.2rem;
+            color: var(--gold);
+            margin-bottom: 30px;
+        }
+        .thumb-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+        }
+        .thumb-grid img {
+            width: 100%;
+            aspect-ratio: 16/10;
+            object-fit: cover;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: var(--transition);
+            border: 2px solid transparent;
+        }
+        .thumb-grid img:hover {
+            border-color: var(--gold);
+            transform: scale(1.03);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
         }
 
+        /* ========== LIGHTBOX ========== */
+        .lightbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.95);
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+        }
+        .lightbox.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        .lightbox img {
+            max-width: 95%;
+            max-height: 90vh;
+            border-radius: 8px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.8);
+        }
+        .lightbox-close {
+            position: absolute;
+            top: 25px;
+            right: 25px;
+            color: var(--white);
+            font-size: 2.5rem;
+            cursor: pointer;
+            z-index: 10;
+            transition: var(--transition);
+        }
+        .lightbox-close:hover {
+            color: var(--gold);
+        }
+
+        /* ========== FOOTER ========== */
         footer {
             text-align: center;
-            padding: 20px;
-            margin-top: 30px;
-            color: #777;
-            border-top: 1px solid #ddd;
+            padding: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: var(--gray);
+            font-size: 0.95rem;
         }
 
-        @media (max-width: 600px) {
-            header h1 {
-                font-size: 2rem;
+        @media (max-width: 768px) {
+            .slide-content h1 {
+                font-size: 2.5rem;
             }
-            .info-section {
-                flex-direction: column;
+            .info-card {
+                grid-template-columns: 1fr;
+            }
+            .thumb-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .nav-phone {
+                font-size: 0.85rem;
+                padding: 8px 16px;
             }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <!-- Header -->
-        <header>
-            <h1>فندق المخا</h1>
-            <p>مرحباً بكم في أفخم إقامة على ساحل اليمن</p>
-        </header>
 
-        <!-- Slideshow -->
-        <div class="slideshow-container" id="slideshow">
-            <!-- الصور ستُحقن عبر JavaScript -->
-            <img class="slide active" src="" alt="صورة الفندق">
-            <img class="slide" src="" alt="صورة الفندق">
-            <img class="slide" src="" alt="صورة الفندق">
-            <img class="slide" src="" alt="صورة الفندق">
-            <img class="slide" src="" alt="صورة الفندق">
-            <img class="slide" src="" alt="صورة الفندق">
-            <img class="slide" src="" alt="صورة الفندق">
-            <img class="slide" src="" alt="صورة الفندق">
+    <!-- PRELOADER -->
+    <div id="preloader">
+        <div class="loader-ring"></div>
+    </div>
+
+    <!-- NAVBAR -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-inner">
+            <a href="#" class="nav-logo">
+                <i class="fas fa-star"></i>
+                <span class="logo-name">جولدن <span>ستار</span></span>
+            </a>
+            <a href="tel:+967779444468" class="nav-phone">
+                <i class="fas fa-phone"></i> +967 779 444 468
+            </a>
         </div>
+    </nav>
 
-        <!-- معلومات التواصل والخريطة -->
-        <div class="info-section">
-            <div class="contact-details">
-                <h2>معلومات التواصل</h2>
-                <div class="contact-item">
-                    <span class="icon">📍</span>
-                    <span>Electricity street, المخا، اليمن</span>
+    <!-- HERO SLIDESHOW -->
+    <section class="hero-slideshow" id="heroSlideshow">
+        <!-- الشرائح تولد بالجافاسكريبت -->
+        <div class="slide-indicators" id="indicators"></div>
+    </section>
+
+    <!-- INFO SECTION -->
+    <section class="info-section">
+        <div class="info-card">
+            <div class="info-details">
+                <h2><i class="fas fa-hotel"></i> معلومات التواصل</h2>
+                <div class="info-item">
+                    <div class="info-icon"><i class="fas fa-map-marker-alt"></i></div>
+                    <div class="info-text">
+                        <h3>الموقع</h3>
+                        <p>Electricity street, المخا، اليمن</p>
+                    </div>
                 </div>
-                <div class="contact-item">
-                    <span class="icon">📞</span>
-                    <a href="tel:+967779444468" class="phone-number">+967 779 444 468</a>
+                <div class="info-item">
+                    <div class="info-icon"><i class="fas fa-phone"></i></div>
+                    <div class="info-text">
+                        <h3>الهاتف</h3>
+                        <a href="tel:+967779444468">+967 779 444 468</a>
+                    </div>
                 </div>
-                <a href="https://maps.app.goo.gl/XTnWtmSWtP2rojmd6" target="_blank" class="map-link">عرض الموقع على خرائط Google</a>
+                <a href="https://maps.app.goo.gl/XTnWtmSWtP2rojmd6" target="_blank" class="btn-gold">
+                    <i class="fas fa-external-link-alt"></i> فتح في خرائط قوقل
+                </a>
             </div>
-            <div class="map-container">
-                <iframe
+            <div class="map-wrapper">
+                <iframe 
                     src="https://maps.google.com/maps?q=Electricity+street,+Al+Mukha,+Yemen&output=embed"
                     allowfullscreen=""
                     loading="lazy"
                     referrerpolicy="no-referrer-when-downgrade"
-                    title="موقع الفندق">
+                    title="موقع فندق جولدن ستار">
                 </iframe>
             </div>
         </div>
+    </section>
 
-        <footer>
-            <p>© 2025 فندق المخا. جميع الحقوق محفوظة.</p>
-        </footer>
+    <!-- GALLERY -->
+    <section class="gallery-strip">
+        <h2>✦ معرض الصور ✦</h2>
+        <div class="thumb-grid" id="thumbGrid"></div>
+    </section>
+
+    <!-- LIGHTBOX -->
+    <div class="lightbox" id="lightbox">
+        <span class="lightbox-close" id="lightboxClose">&times;</span>
+        <img src="" alt="صورة مكبرة" id="lightboxImg">
     </div>
 
+    <!-- FOOTER -->
+    <footer>
+        © 2025 فندق جولدن ستار - المخا. جميع الحقوق محفوظة.
+    </footer>
+
     <script>
-        // أسماء الصور بدون امتداد (تستخدم كاسم للمجلد وأيضاً اسم الملف)
-        const imageNames = [
-            "Gemini_Generated_Image_wt8rpywt8rpywt8r",
-            "Gemini_Generated_Image_dwo522dwo522dwo5",
-            "Gemini_Generated_Image_ijop19ijop19ijop",
-            "Gemini_Generated_Image_o64me5o64me5o64m",
-            "Gemini_Generated_Image_hizxbahizxbahizx",
-            "Gemini_Generated_Image_is5k6cis5k6cis5k",
-            "Gemini_Generated_Image_3f6bge3f6bge3f6b",
-            "Gemini_Generated_Image_s9rd4gs9rd4gs9rd"
+        // ========== أسماء الصور مباشرة من نفس المجلد ==========
+        const imageFiles = [
+            "Gemini_Generated_Image_wt8rpywt8rpywt8r.png",
+            "Gemini_Generated_Image_dwo522dwo522dwo5.png",
+            "Gemini_Generated_Image_ijop19ijop19ijop.png",
+            "Gemini_Generated_Image_o64me5o64me5o64m.png",
+            "Gemini_Generated_Image_hizxbahizxbahizx.png",
+            "Gemini_Generated_Image_is5k6cis5k6cis5k.png",
+            "Gemini_Generated_Image_3f6bge3f6bge3f6b.png",
+            "Gemini_Generated_Image_s9rd4gs9rd4gs9rd.png"
         ];
 
-        // بناء المسار: اسم_المجلد/اسم_الملف.png
-        const imageFiles = imageNames.map(name => `${name}/${name}.png`);
-
-        const slides = document.querySelectorAll('.slide');
-        slides.forEach((img, index) => {
-            if (index < imageFiles.length) {
-                img.src = imageFiles[index];
-                img.alt = `صورة الفندق ${index + 1}`;
-            } else {
-                img.style.display = 'none';
-            }
+        // ========== PRELOADER ==========
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('preloader').classList.add('hidden');
+            }, 600);
         });
 
-        let currentSlide = 0;
-        const totalSlides = imageFiles.length;
+        // ========== BUILD SLIDESHOW ==========
+        const heroSlideshow = document.getElementById('heroSlideshow');
+        const indicatorsContainer = document.getElementById('indicators');
 
-        function showSlide(index) {
-            slides.forEach(slide => slide.classList.remove('active'));
-            if (slides[index]) {
-                slides[index].classList.add('active');
-            }
+        imageFiles.forEach((src, index) => {
+            // إنشاء الشريحة
+            const slideDiv = document.createElement('div');
+            slideDiv.className = `slide ${index === 0 ? 'active' : ''}`;
+            slideDiv.innerHTML = `
+                <img src="${src}" alt="فندق جولدن ستار - صورة ${index + 1}">
+                <div class="slide-overlay"></div>
+                <div class="slide-content">
+                    <div class="stars">★ ★ ★ ★ ★</div>
+                    <h1>فندق <span>جولدن ستار</span></h1>
+                    <p class="subtitle">إقامة فاخرة في قلب المخا</p>
+                </div>
+            `;
+            heroSlideshow.insertBefore(slideDiv, indicatorsContainer);
+
+            // إنشاء المؤشر
+            const indicator = document.createElement('span');
+            indicator.className = `indicator ${index === 0 ? 'active' : ''}`;
+            indicator.addEventListener('click', () => goToSlide(index));
+            indicatorsContainer.appendChild(indicator);
+        });
+
+        const slides = document.querySelectorAll('.hero-slideshow .slide');
+        const indicators = document.querySelectorAll('.indicator');
+        let currentSlide = 0;
+        let slideInterval;
+
+        function goToSlide(index) {
+            slides[currentSlide].classList.remove('active');
+            indicators[currentSlide].classList.remove('active');
+            currentSlide = index;
+            slides[currentSlide].classList.add('active');
+            indicators[currentSlide].classList.add('active');
         }
 
-        setInterval(() => {
-            currentSlide = (currentSlide + 1) % totalSlides;
-            showSlide(currentSlide);
-        }, 3000);
+        function nextSlide() {
+            const next = (currentSlide + 1) % slides.length;
+            goToSlide(next);
+        }
 
-        showSlide(0);
+        // تشغيل تلقائي كل 3 ثوانٍ
+        function startSlideshow() {
+            slideInterval = setInterval(nextSlide, 3000);
+        }
+        startSlideshow();
+
+        // ========== BUILD THUMB GALLERY ==========
+        const thumbGrid = document.getElementById('thumbGrid');
+        imageFiles.forEach((src, index) => {
+            const img = document.createElement('img');
+            img.src = src;
+            img.alt = `فندق جولدن ستار ${index + 1}`;
+            img.loading = 'lazy';
+            img.addEventListener('click', () => openLightbox(src));
+            thumbGrid.appendChild(img);
+        });
+
+        // ========== LIGHTBOX ==========
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightboxImg');
+        const lightboxClose = document.getElementById('lightboxClose');
+
+        function openLightbox(src) {
+            lightboxImg.src = src;
+            lightbox.classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            lightbox.classList.remove('show');
+            document.body.style.overflow = '';
+        }
+
+        lightboxClose.addEventListener('click', closeLightbox);
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) closeLightbox();
+        });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeLightbox();
+        });
+
+        // ========== NAVBAR SCROLL EFFECT ==========
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
     </script>
 </body>
-</html>
+        </html>
