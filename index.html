@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>فندق جولدن ستار - المخا | Golden Star Hotel</title>
+    <meta name="description" content="فندق جولدن ستار - إقامة فاخرة في قلب المخا. احجز إقامتك الآن واستمتع بأفضل الخدمات.">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
@@ -24,6 +25,10 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
@@ -100,6 +105,11 @@
         .nav-logo i {
             font-size: 2.2rem;
             color: var(--gold);
+            animation: glowStar 2s ease-in-out infinite;
+        }
+        @keyframes glowStar {
+            0%, 100% { text-shadow: 0 0 10px rgba(201,168,76,0.5); }
+            50% { text-shadow: 0 0 30px rgba(201,168,76,0.9); }
         }
         .nav-logo .logo-name {
             font-size: 1.6rem;
@@ -108,6 +118,11 @@
         }
         .nav-logo .logo-name span {
             color: var(--gold);
+        }
+        .nav-actions {
+            display: flex;
+            gap: 15px;
+            align-items: center;
         }
         .nav-phone {
             display: flex;
@@ -125,6 +140,8 @@
         .nav-phone:hover {
             background: var(--gold);
             color: var(--primary);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(201,168,76,0.4);
         }
 
         /* ========== HERO SLIDESHOW ========== */
@@ -133,7 +150,6 @@
             width: 100%;
             height: 100vh;
             overflow: hidden;
-            margin-top: 0;
         }
         .slide {
             position: absolute;
@@ -156,11 +172,11 @@
         .slide-overlay {
             position: absolute;
             inset: 0;
-            background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.5) 100%);
+            background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.3) 40%, rgba(0,0,0,0.4) 100%);
         }
         .slide-content {
             position: absolute;
-            bottom: 15%;
+            bottom: 20%;
             right: 8%;
             z-index: 10;
             text-align: right;
@@ -171,14 +187,16 @@
             font-size: 1.2rem;
             letter-spacing: 4px;
             margin-bottom: 15px;
+            animation: fadeInUp 1s ease;
         }
         .slide-content h1 {
-            font-size: 4rem;
+            font-size: 4.5rem;
             font-weight: 800;
             color: var(--white);
             line-height: 1.2;
             margin-bottom: 10px;
             text-shadow: 0 4px 30px rgba(0,0,0,0.6);
+            animation: fadeInUp 1s ease 0.2s both;
         }
         .slide-content h1 span {
             color: var(--gold);
@@ -187,9 +205,13 @@
             font-size: 1.3rem;
             color: #d1d5db;
             margin-bottom: 25px;
+            animation: fadeInUp 1s ease 0.4s both;
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        /* مؤشرات الشرائح */
         .slide-indicators {
             position: absolute;
             bottom: 30px;
@@ -211,6 +233,70 @@
             background: var(--gold);
             width: 35px;
             border-radius: 20px;
+        }
+
+        /* ========== SCROLL DOWN INDICATOR ========== */
+        .scroll-down {
+            position: absolute;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 20;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            color: var(--white);
+            animation: bounce 2s infinite;
+            cursor: pointer;
+        }
+        .scroll-down span {
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+        .scroll-down i {
+            font-size: 1.5rem;
+            color: var(--gold);
+        }
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+            40% { transform: translateX(-50%) translateY(-10px); }
+            60% { transform: translateX(-50%) translateY(-5px); }
+        }
+
+        /* ========== FEATURES STRIP ========== */
+        .features-strip {
+            background: var(--primary-light);
+            border-top: 1px solid rgba(201,168,76,0.2);
+            border-bottom: 1px solid rgba(201,168,76,0.2);
+            padding: 30px 0;
+            overflow: hidden;
+            position: relative;
+            z-index: 10;
+        }
+        .features-marquee {
+            display: flex;
+            gap: 60px;
+            animation: marquee 20s linear infinite;
+            white-space: nowrap;
+        }
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--gold-light);
+            font-size: 1.1rem;
+            font-weight: 500;
+            flex-shrink: 0;
+        }
+        .feature-item i {
+            font-size: 1.5rem;
+            color: var(--gold);
         }
 
         /* ========== INFO SECTION ========== */
@@ -251,6 +337,7 @@
         }
         .info-item:hover {
             background: rgba(255,255,255,0.06);
+            transform: translateX(-5px);
         }
         .info-icon {
             width: 50px;
@@ -305,21 +392,123 @@
         }
         .btn-gold:hover {
             background: var(--gold-light);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(201,168,76,0.4);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(201,168,76,0.5);
         }
 
-        /* ========== GALLERY PREVIEW ========== */
+        /* ========== WHY CHOOSE US ========== */
+        .why-us {
+            max-width: 1200px;
+            margin: 80px auto;
+            padding: 0 20px;
+            text-align: center;
+        }
+        .why-us h2 {
+            font-size: 2.5rem;
+            color: var(--gold);
+            margin-bottom: 15px;
+        }
+        .why-us .section-desc {
+            color: var(--gray);
+            margin-bottom: 50px;
+            font-size: 1.1rem;
+        }
+        .why-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 25px;
+        }
+        .why-card {
+            background: var(--primary-light);
+            border: 1px solid rgba(201,168,76,0.15);
+            border-radius: 16px;
+            padding: 35px 25px;
+            text-align: center;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+        .why-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--gold);
+            transform: scaleX(0);
+            transition: var(--transition);
+        }
+        .why-card:hover::before {
+            transform: scaleX(1);
+        }
+        .why-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--gold);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+        .why-card .why-icon {
+            font-size: 3rem;
+            color: var(--gold);
+            margin-bottom: 20px;
+            transition: var(--transition);
+        }
+        .why-card:hover .why-icon {
+            transform: scale(1.2);
+        }
+        .why-card h3 {
+            color: var(--white);
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+        .why-card p {
+            color: var(--gray);
+            font-size: 0.95rem;
+        }
+
+        /* ========== STATS ========== */
+        .stats-section {
+            background: var(--primary-light);
+            padding: 60px 0;
+            margin: 60px 0;
+            border-top: 1px solid rgba(201,168,76,0.2);
+            border-bottom: 1px solid rgba(201,168,76,0.2);
+        }
+        .stats-grid {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            padding: 0 20px;
+            text-align: center;
+        }
+        .stat-item h3 {
+            font-size: 3rem;
+            color: var(--gold);
+            font-weight: 800;
+        }
+        .stat-item p {
+            color: var(--gray);
+            font-size: 1rem;
+            margin-top: 5px;
+        }
+
+        /* ========== GALLERY ========== */
         .gallery-strip {
             max-width: 1300px;
-            margin: 60px auto;
+            margin: 80px auto;
             padding: 0 20px;
             text-align: center;
         }
         .gallery-strip h2 {
-            font-size: 2.2rem;
+            font-size: 2.5rem;
             color: var(--gold);
-            margin-bottom: 30px;
+            margin-bottom: 15px;
+        }
+        .gallery-strip .section-desc {
+            color: var(--gray);
+            margin-bottom: 40px;
         }
         .thumb-grid {
             display: grid;
@@ -337,8 +526,8 @@
         }
         .thumb-grid img:hover {
             border-color: var(--gold);
-            transform: scale(1.03);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+            transform: scale(1.05);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
         }
 
         /* ========== LIGHTBOX ========== */
@@ -380,6 +569,86 @@
         .lightbox-close:hover {
             color: var(--gold);
         }
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--white);
+            font-size: 2rem;
+            cursor: pointer;
+            padding: 15px;
+            transition: var(--transition);
+            z-index: 10;
+        }
+        .lightbox-nav:hover {
+            color: var(--gold);
+        }
+        .lightbox-prev {
+            left: 20px;
+        }
+        .lightbox-next {
+            right: 20px;
+        }
+
+        /* ========== WHATSAPP BUTTON ========== */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1500;
+            background: #25D366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            text-decoration: none;
+            box-shadow: 0 8px 25px rgba(37,211,102,0.4);
+            transition: var(--transition);
+            animation: pulse 2s infinite;
+        }
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            box-shadow: 0 12px 35px rgba(37,211,102,0.6);
+        }
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(37,211,102,0.4); }
+            70% { box-shadow: 0 0 0 20px rgba(37,211,102,0); }
+            100% { box-shadow: 0 0 0 0 rgba(37,211,102,0); }
+        }
+
+        /* ========== BACK TO TOP ========== */
+        .back-to-top {
+            position: fixed;
+            bottom: 100px;
+            right: 30px;
+            z-index: 1500;
+            background: var(--gold);
+            color: var(--primary);
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.2rem;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            border: none;
+        }
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        .back-to-top:hover {
+            background: var(--gold-light);
+            transform: translateY(-3px);
+        }
 
         /* ========== FOOTER ========== */
         footer {
@@ -390,6 +659,7 @@
             font-size: 0.95rem;
         }
 
+        /* ========== RESPONSIVE ========== */
         @media (max-width: 768px) {
             .slide-content h1 {
                 font-size: 2.5rem;
@@ -397,12 +667,29 @@
             .info-card {
                 grid-template-columns: 1fr;
             }
+            .why-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
             .thumb-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
             .nav-phone {
                 font-size: 0.85rem;
                 padding: 8px 16px;
+            }
+            .whatsapp-float {
+                width: 50px;
+                height: 50px;
+                font-size: 1.5rem;
+                bottom: 20px;
+                right: 20px;
+            }
+            .back-to-top {
+                bottom: 80px;
+                right: 20px;
             }
         }
     </style>
@@ -421,16 +708,40 @@
                 <i class="fas fa-star"></i>
                 <span class="logo-name">جولدن <span>ستار</span></span>
             </a>
-            <a href="tel:+967779444468" class="nav-phone">
-                <i class="fas fa-phone"></i> +967 779 444 468
-            </a>
+            <div class="nav-actions">
+                <a href="tel:+967779444468" class="nav-phone">
+                    <i class="fas fa-phone"></i> +967 779 444 468
+                </a>
+            </div>
         </div>
     </nav>
 
     <!-- HERO SLIDESHOW -->
     <section class="hero-slideshow" id="heroSlideshow">
-        <!-- الشرائح تولد بالجافاسكريبت -->
         <div class="slide-indicators" id="indicators"></div>
+        <div class="scroll-down" onclick="document.querySelector('.features-strip').scrollIntoView({behavior:'smooth'})">
+            <span>استكشف</span>
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </section>
+
+    <!-- FEATURES STRIP -->
+    <section class="features-strip">
+        <div class="features-marquee">
+            <div class="feature-item"><i class="fas fa-wifi"></i> إنترنت فائق السرعة</div>
+            <div class="feature-item"><i class="fas fa-concierge-bell"></i> خدمة غرف 24 ساعة</div>
+            <div class="feature-item"><i class="fas fa-swimming-pool"></i> إطلالة بحرية ساحرة</div>
+            <div class="feature-item"><i class="fas fa-shield-alt"></i> أمان على مدار الساعة</div>
+            <div class="feature-item"><i class="fas fa-parking"></i> مواقف مجانية</div>
+            <div class="feature-item"><i class="fas fa-utensils"></i> مطعم فاخر</div>
+            <!-- تكرار للتمرير السلس -->
+            <div class="feature-item"><i class="fas fa-wifi"></i> إنترنت فائق السرعة</div>
+            <div class="feature-item"><i class="fas fa-concierge-bell"></i> خدمة غرف 24 ساعة</div>
+            <div class="feature-item"><i class="fas fa-swimming-pool"></i> إطلالة بحرية ساحرة</div>
+            <div class="feature-item"><i class="fas fa-shield-alt"></i> أمان على مدار الساعة</div>
+            <div class="feature-item"><i class="fas fa-parking"></i> مواقف مجانية</div>
+            <div class="feature-item"><i class="fas fa-utensils"></i> مطعم فاخر</div>
+        </div>
     </section>
 
     <!-- INFO SECTION -->
@@ -468,17 +779,80 @@
         </div>
     </section>
 
+    <!-- WHY CHOOSE US -->
+    <section class="why-us">
+        <h2>✦ لماذا جولدن ستار؟ ✦</h2>
+        <p class="section-desc">نقدم لك تجربة إقامة لا تُنسى مع أرقى الخدمات</p>
+        <div class="why-grid">
+            <div class="why-card">
+                <div class="why-icon"><i class="fas fa-crown"></i></div>
+                <h3>فخامة ورقي</h3>
+                <p>غرف وأجنحة مصممة بأعلى معايير الفخامة لراحتك</p>
+            </div>
+            <div class="why-card">
+                <div class="why-icon"><i class="fas fa-hand-sparkles"></i></div>
+                <h3>نظافة تامة</h3>
+                <p>تعقيم يومي شامل لجميع المرافق والغرف</p>
+            </div>
+            <div class="why-card">
+                <div class="why-icon"><i class="fas fa-smile"></i></div>
+                <h3>خدمة مميزة</h3>
+                <p>فريق عمل مدرب على أعلى مستوى لخدمتك</p>
+            </div>
+            <div class="why-card">
+                <div class="why-icon"><i class="fas fa-map-marked-alt"></i></div>
+                <h3>موقع استراتيجي</h3>
+                <p>في قلب المخا، قريب من جميع الخدمات</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- STATS -->
+    <section class="stats-section">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <h3 class="counter" data-target="50">0</h3>
+                <p>غرفة وجناح</p>
+            </div>
+            <div class="stat-item">
+                <h3 class="counter" data-target="24">0</h3>
+                <p>ساعة خدمة</p>
+            </div>
+            <div class="stat-item">
+                <h3 class="counter" data-target="100">0</h3>
+                <p>زائر شهرياً</p>
+            </div>
+            <div class="stat-item">
+                <h3 class="counter" data-target="5">0</h3>
+                <p>سنوات خبرة</p>
+            </div>
+        </div>
+    </section>
+
     <!-- GALLERY -->
     <section class="gallery-strip">
         <h2>✦ معرض الصور ✦</h2>
+        <p class="section-desc">اضغط على أي صورة لمشاهدتها بالحجم الكامل</p>
         <div class="thumb-grid" id="thumbGrid"></div>
     </section>
 
     <!-- LIGHTBOX -->
     <div class="lightbox" id="lightbox">
         <span class="lightbox-close" id="lightboxClose">&times;</span>
+        <span class="lightbox-nav lightbox-prev" id="lightboxPrev"><i class="fas fa-chevron-right"></i></span>
+        <span class="lightbox-nav lightbox-next" id="lightboxNext"><i class="fas fa-chevron-left"></i></span>
         <img src="" alt="صورة مكبرة" id="lightboxImg">
     </div>
+
+    <!-- WHATSAPP FLOAT -->
+    <a href="https://wa.me/967779444468" class="whatsapp-float" target="_blank" title="تواصل عبر واتساب">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- BACK TO TOP -->
+    <button class="back-to-top" id="backToTop" title="العودة للأعلى">
+        <i class="fas fa-arrow-up"></i>
+    </button>
 
     <!-- FOOTER -->
     <footer>
@@ -486,7 +860,7 @@
     </footer>
 
     <script>
-        // ========== أسماء الصور مباشرة من نفس المجلد ==========
+        // ========== الصور ==========
         const imageFiles = [
             "Gemini_Generated_Image_wt8rpywt8rpywt8r.png",
             "Gemini_Generated_Image_dwo522dwo522dwo5.png",
@@ -510,7 +884,6 @@
         const indicatorsContainer = document.getElementById('indicators');
 
         imageFiles.forEach((src, index) => {
-            // إنشاء الشريحة
             const slideDiv = document.createElement('div');
             slideDiv.className = `slide ${index === 0 ? 'active' : ''}`;
             slideDiv.innerHTML = `
@@ -524,7 +897,6 @@
             `;
             heroSlideshow.insertBefore(slideDiv, indicatorsContainer);
 
-            // إنشاء المؤشر
             const indicator = document.createElement('span');
             indicator.className = `indicator ${index === 0 ? 'active' : ''}`;
             indicator.addEventListener('click', () => goToSlide(index));
@@ -549,11 +921,14 @@
             goToSlide(next);
         }
 
-        // تشغيل تلقائي كل 3 ثوانٍ
         function startSlideshow() {
             slideInterval = setInterval(nextSlide, 3000);
         }
         startSlideshow();
+
+        // إيقاف مؤقت عند hover
+        heroSlideshow.addEventListener('mouseenter', () => clearInterval(slideInterval));
+        heroSlideshow.addEventListener('mouseleave', startSlideshow);
 
         // ========== BUILD THUMB GALLERY ==========
         const thumbGrid = document.getElementById('thumbGrid');
@@ -562,7 +937,7 @@
             img.src = src;
             img.alt = `فندق جولدن ستار ${index + 1}`;
             img.loading = 'lazy';
-            img.addEventListener('click', () => openLightbox(src));
+            img.addEventListener('click', () => openLightbox(index));
             thumbGrid.appendChild(img);
         });
 
@@ -570,9 +945,13 @@
         const lightbox = document.getElementById('lightbox');
         const lightboxImg = document.getElementById('lightboxImg');
         const lightboxClose = document.getElementById('lightboxClose');
+        const lightboxPrev = document.getElementById('lightboxPrev');
+        const lightboxNext = document.getElementById('lightboxNext');
+        let currentLightboxIndex = 0;
 
-        function openLightbox(src) {
-            lightboxImg.src = src;
+        function openLightbox(index) {
+            currentLightboxIndex = index;
+            lightboxImg.src = imageFiles[index];
             lightbox.classList.add('show');
             document.body.style.overflow = 'hidden';
         }
@@ -582,15 +961,36 @@
             document.body.style.overflow = '';
         }
 
+        function lightboxPrevFn() {
+            currentLightboxIndex = (currentLightboxIndex - 1 + imageFiles.length) % imageFiles.length;
+            lightboxImg.src = imageFiles[currentLightboxIndex];
+        }
+
+        function lightboxNextFn() {
+            currentLightboxIndex = (currentLightboxIndex + 1) % imageFiles.length;
+            lightboxImg.src = imageFiles[currentLightboxIndex];
+        }
+
         lightboxClose.addEventListener('click', closeLightbox);
         lightbox.addEventListener('click', (e) => {
             if (e.target === lightbox) closeLightbox();
         });
+        lightboxPrev.addEventListener('click', (e) => {
+            e.stopPropagation();
+            lightboxPrevFn();
+        });
+        lightboxNext.addEventListener('click', (e) => {
+            e.stopPropagation();
+            lightboxNextFn();
+        });
         document.addEventListener('keydown', (e) => {
+            if (!lightbox.classList.contains('show')) return;
             if (e.key === 'Escape') closeLightbox();
+            if (e.key === 'ArrowRight') lightboxNextFn();
+            if (e.key === 'ArrowLeft') lightboxPrevFn();
         });
 
-        // ========== NAVBAR SCROLL EFFECT ==========
+        // ========== NAVBAR SCROLL ==========
         const navbar = document.getElementById('navbar');
         window.addEventListener('scroll', () => {
             if (window.scrollY > 50) {
@@ -599,6 +999,47 @@
                 navbar.classList.remove('scrolled');
             }
         });
+
+        // ========== COUNTER ANIMATION ==========
+        const counters = document.querySelectorAll('.counter');
+        const counterObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const counter = entry.target;
+                    const target = +counter.getAttribute('data-target');
+                    const duration = 2000;
+                    const step = target / (duration / 16);
+                    let current = 0;
+                    
+                    const updateCounter = () => {
+                        current += step;
+                        if (current < target) {
+                            counter.textContent = Math.floor(current);
+                            requestAnimationFrame(updateCounter);
+                        } else {
+                            counter.textContent = target;
+                        }
+                    };
+                    updateCounter();
+                    counterObserver.unobserve(counter);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        counters.forEach(counter => counterObserver.observe(counter));
+
+        // ========== BACK TO TOP ==========
+        const backToTop = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 600) {
+                backToTop.classList.add('show');
+            } else {
+                backToTop.classList.remove('show');
+            }
+        });
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
     </script>
 </body>
-        </html>
+    </html>
